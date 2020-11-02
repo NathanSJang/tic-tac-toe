@@ -45,24 +45,28 @@ init();
 boxEl.forEach(function(box) {
   box.addEventListener('click', handleBoxClick);
   clicked = true;
-})
+  })
 
 function handleBoxClick(e) {
   const box = Array.from(boxEl);
   const index = box.indexOf(e.target);
+  const remove = e.target.removeEventListener('click', handleBoxClick);
 
   borad[index] = currentPlayer;
   if (currentPlayer === player[1]) {
-    boxEl[index].setAttribute('class', 'box-x')
+    boxEl[index].setAttribute('class', 'box-x');
     currentPlayer = player[-1];
+    remove;
 
   } else {
-    boxEl[index].setAttribute('class', 'box-y')
+    boxEl[index].setAttribute('class', 'box-y');
     currentPlayer = player[1];
+    remove;
 
   }
   
   gameStatus = gameStatusWin();
+  
 
   render();
 }
@@ -110,13 +114,13 @@ function render() {
     }
   }
 
-  function renderBoxes() {
-    boxEl.forEach(function(box) {
-      if (clicked === true) {
-        box.disabled = true;
-      }
-    })
-    }
+  // function renderBoxes() {
+  //   boxEl.forEach(function(box) {
+  //     if (clicked === true) {
+  //       box.prevetDefault();
+  //     }
+  //   })
+  //   }
 
 function init() {
   borad = [null, null, null, null, null, null, null, null, null];
