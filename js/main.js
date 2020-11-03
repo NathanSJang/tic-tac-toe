@@ -26,7 +26,6 @@ let clicked = false;
 const boxEl = document.querySelectorAll('.box');
 const msgEl = document.getElementById('msg');
 const replayBtn = document.getElementById('replay');
-const clickBox = document.querySelector('.box');
 const xBox = document.querySelectorAll('.box-x');
 const yBox = document.querySelector('.box-y')
 
@@ -50,24 +49,18 @@ boxEl.forEach(function(box) {
 function handleBoxClick(e) {
   const box = Array.from(boxEl);
   const index = box.indexOf(e.target);
-  const remove = e.target.removeEventListener('click', handleBoxClick);
-
+  
   borad[index] = currentPlayer;
   if (currentPlayer === player[1]) {
     boxEl[index].setAttribute('class', 'box-x');
     currentPlayer = player[-1];
-    remove;
-
   } else {
     boxEl[index].setAttribute('class', 'box-y');
     currentPlayer = player[1];
-    remove;
-
-  }
+    }
   
   gameStatus = gameStatusWin();
   
-
   render();
 }
 
@@ -128,7 +121,6 @@ function init() {
   currentPlayer = player[1];
   gameStatus = null;
   
-
   resetBorad();
   render();
 }
